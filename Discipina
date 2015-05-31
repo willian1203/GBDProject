@@ -1,0 +1,40 @@
+package myPackage;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Disciplina {
+    ArrayList<String> dados = new ArrayList<String>();
+
+    public ArrayList<String> getDados() {
+        return dados;
+    }
+    
+    public void lerDados (String catalogo){ 
+        try{ 
+            FileReader arq = new FileReader(catalogo); 
+            BufferedReader lerArq = new BufferedReader(arq);
+            String linha = lerArq.readLine();
+            while (!linha.contains("DISCIPLINA")) {
+                linha = lerArq.readLine();
+            }
+            while (!linha.contains(";")){
+                linha = lerArq.readLine();
+            
+                for (int i=0; i<linha.length(); i++){
+                    if (linha.charAt(i) == ' '){
+                        int j = i + 1;
+                        dados.add(linha.substring(j));
+                    }
+                }
+            }
+            arq.close();
+            } catch (IOException e) { 
+                System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage()); 
+            }
+    }
+}
