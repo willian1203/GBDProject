@@ -1,0 +1,31 @@
+package myPackage;
+
+import java.util.ArrayList;
+
+public class Alocacao {
+    ArrayList<String> dados;
+    String temp;
+    int tamanho = 0;
+    
+    public Alocacao (ArrayList<String> dados){
+        this.dados = dados;
+    }
+    
+    public void alocar(){
+        for (int i = 0; i < dados.size(); i++){
+            if (dados.get(i).contains("int")){
+               tamanho = tamanho + 4; 
+            }
+            else{
+                 for (int j=0; j<dados.get(i).length(); j++){
+                    if (dados.get(i).charAt(j) == '('){
+                        int k = j + 1;
+                        temp = dados.get(i).substring(k, dados.get(i).length()-1);
+                        tamanho = tamanho + Integer.parseInt(temp);
+                    }
+                }
+            }
+        }
+        System.out.println(tamanho);
+    }
+}
