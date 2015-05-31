@@ -1,0 +1,65 @@
+package myPackage;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class Catalogo {
+    
+    private PrintWriter p;
+    
+    public Catalogo(String nome, String nomeEsquema){
+        criaBD(nome, nomeEsquema);
+    }
+    
+    private void criaBD(String nomeArquivo, String nomeEsquema){
+        
+        try{
+            p = new PrintWriter(nomeArquivo+".txt", "UTF-8");
+            p.write(nomeEsquema+";\n");
+        }
+        catch(IOException e)
+        {
+            System.out.println("Falha ao abrir arquivo");
+        }
+        finally{
+            p.close();
+        }
+    }
+    
+    public void defineTabela(String nomeArquivo){
+         try{
+            p = new PrintWriter(new FileWriter(nomeArquivo+".txt", true));
+            p.print("\nESTUDANTE");
+            p.print("\nnome varchar(20)");
+            p.print("\nsobrenome varchar(30)");
+            p.print("\nidade int");
+            p.print("\nmatricula int\n;\n");
+        
+            p.print("\nPROFESSOR");
+            p.print("\nnome varchar(20)");
+            p.print("\nsobrenome varchar(30)");
+            p.print("\nidade int");
+            p.print("\nprofID int\n;\n");
+           
+            p.print("\nDISCIPLINA");
+            p.print("\nnome varchar(50)");
+            p.print("\nprofID int");
+            p.print("\ndisciplinaID int\n;\n");
+            
+            p.print("\nMATRICULA");
+            p.print("\nestudanteID int");
+            p.print("\ndisciplinaID int");
+            p.print("\ncreditos int\n;");
+        }
+        catch(IOException e)
+        {
+            System.out.println("Falha ao abrir arquivo");
+        }
+        finally{
+            p.close();
+        }
+    }
+    
+    
+}
