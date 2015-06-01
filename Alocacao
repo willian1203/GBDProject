@@ -11,7 +11,7 @@ public class Alocacao {
         this.dados = dados;
     }
     
-    public void alocar(){
+    public int calcular(){
         for (int i = 0; i < dados.size(); i++){
             if (dados.get(i).contains("int")){
                tamanho = tamanho + 4; 
@@ -26,6 +26,6 @@ public class Alocacao {
                 }
             }
         }
-        System.out.println(tamanho);
+        return tamanho;
     }
 }
