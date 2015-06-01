@@ -4,13 +4,23 @@ import myPackage.*;
 public class Principal {
     public static void main(String[] args) {
         Catalogo cat = new Catalogo("catalogo", "Universidade Cachoeira");
-        Matricula est = new Matricula();
+        Estudante est = new Estudante();
         cat.defineTabela("catalogo");
         //cat.carregaTabela();
         est.lerDados("catalogo.txt");
         
         Alocacao aloc = new Alocacao(est.getDados());
-        aloc.alocar();
+        
+        int temp = aloc.calcular();
+        
+        //Tentar inserir registro (em binario) na pagina
+        //Se pagina estiver cheia
+        //Cria pag
+        //Insere registro
+        //Atualiza dados da pagina
+   
+        
+        
     }
     
 }
