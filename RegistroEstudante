@@ -1,0 +1,18 @@
+package myPackage;
+
+public class RegistroEstudante extends Registro{
+    
+    private String nome;
+    private String sobrenome;
+    private int matriculaID;
+    private int idade;
+    
+    public RegistroEstudante(int tam){
+    
+    }
+
+    @Override
+    public void fazNada() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+}
