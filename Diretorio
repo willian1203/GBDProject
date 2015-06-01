@@ -1,0 +1,17 @@
+package myPackage;
+
+import java.util.ArrayList;
+
+public class Diretorio {
+    int posLivre;       //em bytes
+    int espacoLivre;    //espaco livre na pag em bytes
+    int qtdRegistros;
+    ArrayList<Registro> registros;
+
+    public Diretorio(){
+        registros = new ArrayList<Registro>();
+        posLivre = 0;                           //<<<<<<
+        qtdRegistros = 0;
+        espacoLivre = Pagina.TAMANHO;
+    }
+}
