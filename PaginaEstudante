@@ -1,0 +1,18 @@
+package myPackage;
+
+public class PaginaEstudante extends Pagina{
+    
+    public PaginaEstudante(){
+        super();
+    }
+    
+    @Override
+    public void inserirRegistro(Registro reg) {
+        
+    }
+
+    @Override
+    public void removerRegistro(Registro reg) {
+    }
+    
+}
