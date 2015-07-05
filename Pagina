@@ -1,13 +1,14 @@
 package myPackage;
 
 public abstract class Pagina {
-    public static final int TAMANHO = 512;
+    public static final int TAMANHO = 8196; //8KB
     protected Diretorio dir;
     
     public Pagina(){
         dir = new Diretorio();
     }
     
+    //Recebe reg em binario e tenta inserir na pagina
     public abstract void inserirRegistro(Registro reg);
     public abstract void removerRegistro(Registro reg);
 }
