@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class Professor {
     ArrayList<String> dados = new ArrayList<String>();
 
+    ArrayList<Integer> tamanho = new ArrayList<Integer>();
+
     public ArrayList<String> getDados() {
         return dados;
     }
@@ -37,4 +39,8 @@ public class Professor {
                 System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage()); 
             }
     }
+    
+    public ArrayList<Integer> getTamanho() {
+		return tamanho;
+	}
 }
