@@ -1,4 +1,11 @@
+
 package myPackage;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class RegistroEstudante extends Registro{
     
@@ -8,11 +15,99 @@ public class RegistroEstudante extends Registro{
     private int idade;
     
     public RegistroEstudante(int tam){
-    
+    	
     }
 
-    @Override
-    public void fazNada() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public void inserirFormatado(Pagina pagina) {
+		//Ler e
+		//Formatar
+		
+		
+		//Inserir
+		pagina.inserirRegistro(this);
+	}
+	
+	
+	public void verificaRegistro() {
+		
+		PaginaInicial = new PaginaEstudante;
+		
+		ArrayList<byte[]> registroBytes = new ArrayList<byte[]>();
+		String linha = null;
+
+		try {
+			FileReader arq = new FileReader("Estudante.txt");
+			BufferedReader lerArq = new BufferedReader(arq);
+			StringTokenizer st = null;
+
+			while ((linha = lerArq.readLine()) != null) {
+
+				st = new StringTokenizer(linha, ",");
+				String dados = null;
+
+				while (st.hasMoreTokens()) {
+					dados = st.nextToken();
+					nome = dados;
+					dados = st.nextToken();
+					sobrenome = dados;
+					dados = st.nextToken();
+					idade = Integer.parseInt(dados);
+					dados = st.nextToken();
+					matriculaID = Integer.parseInt(dados);
+
+					/*System.out.println("Nome: " + nome);
+					System.out.println("Sobrenome: " + sobrenome);
+					System.out.println("Idade: " + idade);
+					System.out.println("Matricula: " + matricula);
+					System.out.println();*/
+					
+					//Verifica se o tamanho do registro obedece ao tamanho definido no catalogo
+					if (nome.length() <= Estudante.tamanho.get(0) &&
+						sobrenome.length() <= Estudante.tamanho.get(1) &&
+						Integer.BYTES <= Estudante.tamanho.get(2) &&
+						Integer.BYTES <= Estudante.tamanho.get(3)){
+						
+						//Transformacao dos dados em bytes
+						byte[] nomeBytes = nome.getBytes();
+						byte[] sobrenomeBytes = sobrenome.getBytes();
+						byte[] idadeBytes = intToByteArray(idade);
+						byte[] matriculaBytes = intToByteArray(matriculaID);
+						
+						//Insercao dos bytes em um vetor (em um varchar preciso de um campo pra saber o tam da string)
+						
+						registroBytes.add(nomeBytes);
+						registroBytes.add(sobrenomeBytes);
+						registroBytes.add(idadeBytes);
+						registroBytes.add(matriculaBytes);
+						
+						if(PaginaInicial Cheia){
+							paginaInicial = new PaginaEstudante;
+							insereFormatado(paginaInicial)
+						}else{
+						inserirFormatado(paginaInicial);
+						}
+					}
+					else{
+						//Erro, pois os valores ultrapassam o tamanho limite definido no catalogo
+					}
+				}
+				
+
+			}
+			arq.close();
+		} catch (IOException e) {
+			System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
+		}
+	}
+
+	
+	public byte[] intToByteArray(int value){
+		return new byte[]{
+				(byte)(value >>> 24),
+				(byte)(value >>> 16),
+				(byte)(value >>> 8),
+				(byte)(value)
+		};
+	}
 }
