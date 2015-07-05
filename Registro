@@ -1,5 +1,9 @@
 package myPackage;
 
 public abstract class Registro {
-    public abstract void fazNada();
+
+	//Todo registro sera formatado para bin
+	public abstract void inserirFormatado(Pagina pagina);
+	//Inserir registro na pagina apropriada de acordo com o tipo dele
+	
 }
