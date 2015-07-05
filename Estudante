@@ -6,35 +6,68 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Estudante {
-    ArrayList<String> dados = new ArrayList<String>();
+	/**
+	 * Vetor guardando os tipos de cada atributo "int" | "varchar(20) |"
+	 */
+	static ArrayList<String> dados = new ArrayList<String>();
 
-    public ArrayList<String> getDados() {
-        return dados;
-    }
-    
-    public void lerDados (String catalogo){ 
-        try{ 
-            FileReader arq = new FileReader(catalogo); 
-            BufferedReader lerArq = new BufferedReader(arq);
-            String linha = lerArq.readLine();
-            while (!linha.contains("ESTUDANTE")) {
-                linha = lerArq.readLine();
-            }
-            while (!linha.contains(";")){
-                linha = lerArq.readLine();
-            
-                for (int i=0; i<linha.length(); i++){
-                    if (linha.charAt(i) == ' '){
-                        int j = i + 1;
-                        dados.add(linha.substring(j));
-                    }
-                }
-            }
-            arq.close();
-            } catch (IOException e) { 
-                System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage()); 
-            }
-    }
+	/**
+	 * Vetor com o tamanho para cada atributo de um registro 20 | 30 | 4 | 4 |
+	 */
+	static ArrayList<Integer> tamanho = new ArrayList<Integer>();
+
+	/**
+	 * Recebendo o catalogo, a funcao ira criar o vetor dados 
+	 * com os tipos da tabela*/
+	public void lerDados(String catalogo) {
+		try {
+			// Abre o catalogo
+			FileReader arq = new FileReader(catalogo);
+			BufferedReader lerArq = new BufferedReader(arq);
+			String linha = lerArq.readLine();
+			while (!linha.contains("ESTUDANTE")) {
+				linha = lerArq.readLine();
+			}
+			while (!linha.contains(";")) {
+				linha = lerArq.readLine();
+
+				for (int i = 0; i < linha.length(); i++) {
+					if (linha.charAt(i) == ' ') {
+						int j = i + 1;
+						dados.add(linha.substring(j));
+					}
+				}
+			}
+			arq.close();
+		} catch (IOException e) {
+			System.err.printf("Erro na abertura do arquivo: %s.\n",
+					e.getMessage());
+		}
+	}
+
+	/**
+	 * De acordo com o que esta no vetor "dados", ira definir o vetor "tamanho"*/
+	public void calcular() {
+		for (int i = 0; i < dados.size(); i++) {
+			//Se for int, add 4 bytes no vetor
+			if (dados.get(i).contains("int")) {
+				this.tamanho.add(4);
+			} else {
+				//Caso contrario, sera o numero que esta entre parenteses no VARCHAR(x)
+				for (int j = 0; j < dados.get(i).length(); j++) {
+					if (dados.get(i).charAt(j) == '(') {
+						int k = j + 1;
+						String temp = dados.get(i).substring(k,
+								dados.get(i).length() - 1);
+						this.tamanho.add(Integer.parseInt(temp));
+					}
+				}
+			}
+		}
+	}
+
+	
 }
